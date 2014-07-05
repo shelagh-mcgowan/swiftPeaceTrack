@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "215711DB19673D0D009A533C"
+               BuildableName = "swiftPeaceTrack&lt;3.app"
+               BlueprintName = "swiftPeaceTrack&lt;3"
+               ReferencedContainer = "container:swiftPeaceTrack&lt;3.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -12,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "215711EB19673D0E009A533C"
+               BuildableName = "swiftPeaceTrack&lt;3Tests.xctest"
+               BlueprintName = "swiftPeaceTrack&lt;3Tests"
+               ReferencedContainer = "container:swiftPeaceTrack&lt;3.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "215711DB19673D0D009A533C"
+            BuildableName = "swiftPeaceTrack&lt;3.app"
+            BlueprintName = "swiftPeaceTrack&lt;3"
+            ReferencedContainer = "container:swiftPeaceTrack&lt;3.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -23,6 +58,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "215711DB19673D0D009A533C"
+            BuildableName = "swiftPeaceTrack&lt;3.app"
+            BlueprintName = "swiftPeaceTrack&lt;3"
+            ReferencedContainer = "container:swiftPeaceTrack&lt;3.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -32,6 +76,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "215711DB19673D0D009A533C"
+            BuildableName = "swiftPeaceTrack&lt;3.app"
+            BlueprintName = "swiftPeaceTrack&lt;3"
+            ReferencedContainer = "container:swiftPeaceTrack&lt;3.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

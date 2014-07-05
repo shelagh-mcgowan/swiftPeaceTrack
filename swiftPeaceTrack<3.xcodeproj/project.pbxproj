@@ -11,6 +11,8 @@
 		215711E519673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 215711E319673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld */; };
 		215711E719673D0E009A533C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 215711E619673D0D009A533C /* Images.xcassets */; };
 		215711F319673D0E009A533C /* swiftPeaceTrack_3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215711F219673D0E009A533C /* swiftPeaceTrack_3Tests.swift */; };
+		215711FD19673D72009A533C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 215711FC19673D72009A533C /* Storyboard.storyboard */; };
+		215711FF19673E8D009A533C /* VCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215711FE19673E8D009A533C /* VCMain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,8 @@
 		215711EC19673D0E009A533C /* swiftPeaceTrack<3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftPeaceTrack<3Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		215711F119673D0E009A533C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		215711F219673D0E009A533C /* swiftPeaceTrack_3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftPeaceTrack_3Tests.swift; sourceTree = "<group>"; };
+		215711FC19673D72009A533C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		215711FE19673E8D009A533C /* VCMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				215711E619673D0D009A533C /* Images.xcassets */,
 				215711E319673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld */,
 				215711DF19673D0D009A533C /* Supporting Files */,
+				215711FC19673D72009A533C /* Storyboard.storyboard */,
+				215711FE19673E8D009A533C /* VCMain.swift */,
 			);
 			path = "swiftPeaceTrack<3";
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				215711E719673D0E009A533C /* Images.xcassets in Resources */,
+				215711FD19673D72009A533C /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +212,7 @@
 			files = (
 				215711E519673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld in Sources */,
 				215711E219673D0D009A533C /* AppDelegate.swift in Sources */,
+				215711FF19673E8D009A533C /* VCMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
