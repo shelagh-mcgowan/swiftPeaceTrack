@@ -35,50 +35,32 @@
                                     <action selector="btnLoad" destination="EPE-HT-7Nt" eventType="touchUpInside" id="Ax5-sD-xPJ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your Sector" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x3J-07-gEg">
-                                <rect key="frame" x="20" y="172" width="280" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5J-hp-hHL">
                                 <rect key="frame" x="208" y="258" width="34" height="30"/>
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnSave" destination="EPE-HT-7Nt" eventType="touchUpInside" id="MwE-s7-MqA"/>
+                                    <action selector="btnSave" destination="EPE-HT-7Nt" eventType="touchUpInside" id="hVZ-56-FtU"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your post" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MJK-Vh-5Uh">
-                                <rect key="frame" x="20" y="126" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Post" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dv0-FC-WxM">
+                                <rect key="frame" x="20" y="129" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKc-JV-TEi">
-                                <rect key="frame" x="186" y="210" width="92" height="30"/>
-                                <state key="normal" title="Load Posts">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnLoadPostArray" destination="EPE-HT-7Nt" eventType="touchUpInside" id="3rw-O9-Y1h"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMM-gS-STs">
-                                <rect key="frame" x="29" y="210" width="95" height="30"/>
-                                <state key="normal" title="Load Sectors">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnLoadSectorArray" destination="EPE-HT-7Nt" eventType="touchUpInside" id="RAw-JV-pwR"/>
-                                </connections>
-                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sector" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="emg-o3-hEq">
+                                <rect key="frame" x="20" y="167" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="txtFullName" destination="PaC-Cc-sqU" id="WCr-0e-s7X"/>
-                        <outlet property="txtPost" destination="MJK-Vh-5Uh" id="Lbh-3u-fQB"/>
-                        <outlet property="txtSector" destination="x3J-07-gEg" id="jea-bc-mF2"/>
+                        <outlet property="txtPost" destination="Dv0-FC-WxM" id="YDq-wQ-Seq"/>
+                        <outlet property="txtSector" destination="emg-o3-hEq" id="g69-p0-DcN"/>
                         <outlet property="txtVolunteerID" destination="tvq-WY-HZd" id="4h3-XP-vFH"/>
                     </connections>
                 </viewController>
