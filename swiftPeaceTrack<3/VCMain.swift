@@ -12,8 +12,12 @@ class VCMain: UIViewController {
 
     @IBOutlet var txtFullName: UITextField!
     @IBOutlet var txtVolunteerID: UITextField!
+    @IBOutlet var txtPost: UITextField!
+    @IBOutlet var txtSector: UITextField!
+    //@IBOutlet var pickerPost: UIPickerView!
+    //@IBOutlet var pickerSector: UIPickerView!
     
-    //creates a new user object and saves it to the database
+    //creates a new user object and saves it to the data store
     @IBAction func btnSave(){
        
         //create a new variable appDel to store app delegate 
@@ -24,10 +28,12 @@ class VCMain: UIViewController {
         //make a new user object that will be inserting itself into the database
         //cast it back to an NSManagedObject
         var newUser = NSEntityDescription.insertNewObjectForEntityForName("Users", inManagedObjectContext: context) as NSManagedObject
-        //user has a full name. set the information into our data model
+        //user has a full name. set the information into our data store
         newUser.setValue(""+txtFullName.text, forKey: "username")
-        //user has a volunteer ID. set the information into our data model
+        //user has a volunteer ID. set the information into our data store
         newUser.setValue(""+txtVolunteerID.text, forKey: "password")
+      //  newUser.setValue(""+txtPost.text, forKey: "country")
+        //newUser.setValue(""+txtSector.text, forKey: "sector")
         //save the object
         context.save(nil)
         //placeholder to show an error message
@@ -62,25 +68,67 @@ class VCMain: UIViewController {
         //println("load button pressed \(txtVolunteerID.text)")
         
     }
-        override func viewDidLoad() {
+
+    //  The purpose of this button is to print out an array of sector attributes for the User entity. I cannot figure out how to fetch attributes. I have created a predicate, but am not sure how to specify the sector attribute within the predicate declaration. Objective-C code will work here as well. After this problem is solved, I will be able to create a picker menu filled with sectorsarray strings.
+    
+    @IBAction func btnLoadSectorArray(){
+        
+       var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+       
+        var context:NSManagedObjectContext = appDel.managedObjectContext
+    
+        var sectors = NSFetchRequest(entityName: "Users")
+        
+        sectors.returnsObjectsAsFaults = false;
+        
+        //declare predicate
+        var predicate: NSPredicate!
+      
+        //make an array filled with sector attributes. ???
+        var propertiesToFetch: NSArray []!
+        
+        
+        //populate the array with the fetched sectors
+        var sectorsarray:NSArray = context.executeFetchRequest(sectors, error: nil)
+        
+        if(sectorsarray.count > 0){
+            for res in sectorsarray{
+                println(res)
+            }
+       
+        }else{
+            println("0 Results Returned...Potential Error")
+        }
+    
+       // println("snazzy turtle")
+}
+
+   @IBAction func btnLoadPostArray(){
+        //same as btnSave() function
+        var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        //same as btnSave() function
+        var context:NSManagedObjectContext = appDel.managedObjectContext
+
+     func viewDidLoad() {
         
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+     func didReceiveMemoryWarning() {
         
         // Dispose of any resources that can be recreated.
     }
     
 
-    /*
+    
     // #pragma mark - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
+     func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
-    */
 
+
+    }
 }
