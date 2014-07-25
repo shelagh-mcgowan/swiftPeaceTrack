@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213B59FA1982E21900D6D314 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213B59F91982E21900D6D314 /* Main.storyboard */; };
+		213B59FB1982E21900D6D314 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213B59F91982E21900D6D314 /* Main.storyboard */; };
 		215711E219673D0D009A533C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215711E119673D0D009A533C /* AppDelegate.swift */; };
 		215711E519673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 215711E319673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld */; };
 		215711E719673D0E009A533C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 215711E619673D0D009A533C /* Images.xcassets */; };
 		215711F319673D0E009A533C /* swiftPeaceTrack_3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215711F219673D0E009A533C /* swiftPeaceTrack_3Tests.swift */; };
-		215711FD19673D72009A533C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 215711FC19673D72009A533C /* Storyboard.storyboard */; };
 		215711FF19673E8D009A533C /* VCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215711FE19673E8D009A533C /* VCMain.swift */; };
+		21763DCB197F12D4007BC9D0 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21763DCA197F12D3007BC9D0 /* Property List.plist */; };
+		21763DCD197F134F007BC9D0 /* sectors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21763DCC197F134F007BC9D0 /* sectors.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		213B59F91982E21900D6D314 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		215711DC19673D0D009A533C /* swiftPeaceTrack<3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftPeaceTrack<3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		215711E019673D0D009A533C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		215711E119673D0D009A533C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,8 +38,9 @@
 		215711EC19673D0E009A533C /* swiftPeaceTrack<3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftPeaceTrack<3Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		215711F119673D0E009A533C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		215711F219673D0E009A533C /* swiftPeaceTrack_3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftPeaceTrack_3Tests.swift; sourceTree = "<group>"; };
-		215711FC19673D72009A533C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		215711FE19673E8D009A533C /* VCMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMain.swift; sourceTree = "<group>"; };
+		21763DCA197F12D3007BC9D0 /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
+		21763DCC197F134F007BC9D0 /* sectors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sectors.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +82,14 @@
 		215711DE19673D0D009A533C /* swiftPeaceTrack<3 */ = {
 			isa = PBXGroup;
 			children = (
+				213B59F91982E21900D6D314 /* Main.storyboard */,
 				215711E119673D0D009A533C /* AppDelegate.swift */,
 				215711E619673D0D009A533C /* Images.xcassets */,
 				215711E319673D0D009A533C /* swiftPeaceTrack_3.xcdatamodeld */,
 				215711DF19673D0D009A533C /* Supporting Files */,
-				215711FC19673D72009A533C /* Storyboard.storyboard */,
 				215711FE19673E8D009A533C /* VCMain.swift */,
+				21763DCA197F12D3007BC9D0 /* Property List.plist */,
+				21763DCC197F134F007BC9D0 /* sectors.plist */,
 			);
 			path = "swiftPeaceTrack<3";
 			sourceTree = "<group>";
@@ -191,8 +198,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21763DCB197F12D4007BC9D0 /* Property List.plist in Resources */,
 				215711E719673D0E009A533C /* Images.xcassets in Resources */,
-				215711FD19673D72009A533C /* Storyboard.storyboard in Resources */,
+				21763DCD197F134F007BC9D0 /* sectors.plist in Resources */,
+				213B59FA1982E21900D6D314 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213B59FB1982E21900D6D314 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +399,7 @@
 				215711F819673D0E009A533C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		215711F919673D0E009A533C /* Build configuration list for PBXNativeTarget "swiftPeaceTrack<3Tests" */ = {
 			isa = XCConfigurationList;
@@ -397,6 +408,7 @@
 				215711FB19673D0E009A533C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

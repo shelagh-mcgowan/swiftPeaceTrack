@@ -3,19 +3,78 @@
 //
 //  Created by Shelagh McGowan on 7/4/14.
 //  Copyright (c) 2014 Shelagh McGowan. All rights reserved.
-//
-
+//  Citing https://github.com/GabrielMassana/Picker-iOS8 :Picker menu views code
+import Foundation
 import UIKit
 import CoreData
-class VCMain: UIViewController {
-    
+class VCMain: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, NSURLConnectionDelegate {
+   
+    //configure text boxes
         @IBOutlet var txtFullName: UITextField!
         @IBOutlet var txtVolunteerID: UITextField!
-        @IBOutlet var txtPost: UITextField!
-        @IBOutlet var txtSector: UITextField!
+   
+    //configure picker views
+    var countryPicker = UIPickerView()
+    var sectorPicker = UIPickerView()
     
-        //creates a new user object and saves it to the database
-        @IBAction func btnSave(){
+    var countryPickerData  = NSArray()
+    var sectorPickerData = NSArray()
+    
+    var countriesArray: NSMutableArray =  NSMutableArray()
+    var sectorsArray: NSMutableArray = NSMutableArray()
+    
+    //configure lables related to picker views
+    @IBOutlet var countryLabel : UILabel = nil
+    @IBOutlet var sectorLabel : UILabel = nil
+    
+    //get the window ready
+    var actionView: UIView = UIView()
+    var window: UIWindow? = nil
+
+    //gets everything set up in the view
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var delegate = UIApplication.sharedApplication()
+        var myWindow: UIWindow? = delegate.keyWindow
+        var myWindow2: NSArray = delegate.windows
+       
+        if let myWindow: UIWindow = UIApplication.sharedApplication().keyWindow
+        {
+            window = myWindow
+        }
+        else         {
+            window = myWindow2[0] as? UIWindow
+        }
+        
+        countryPicker.backgroundColor = UIColor.whiteColor()
+        sectorPicker.backgroundColor = UIColor.whiteColor()
+        
+        actionView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.size.height.0, UIScreen.mainScreen().bounds.size.width, 260.0)
+        
+        var filePath =  NSBundle.mainBundle().pathForResource("Property List", ofType: "plist")
+        var filePath2 = NSBundle.mainBundle().pathForResource("sectors", ofType: "plist")
+        countriesArray = NSMutableArray(contentsOfFile: filePath)
+        countriesArray.insertObject("", atIndex: 0)
+        countriesArray.insertObject("No country", atIndex: 0)
+        sectorsArray =  NSMutableArray(contentsOfFile: filePath2)
+        sectorsArray.insertObject("", atIndex: 0)
+        sectorsArray.insertObject("No sector", atIndex: 0)
+    
+    }
+    
+  //API code
+    /*  override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        startConnection()
+    }*/
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+         // Dispose of any resources that can be recreated.
+    }
+
+    //creates a new user object and saves it to the database. also prints out the object for you to see.
+        @IBAction func btnLoginAndSave(){
         
                 //create a new variable appDel to store app delegate
                 //cast delegate of type UIApplication to our delegate type AppDelegate
@@ -28,8 +87,8 @@ class VCMain: UIViewController {
             
                 newUser.setValue(""+txtFullName.text, forKey: "username")
                 newUser.setValue(""+txtVolunteerID.text, forKey: "password")
-                newUser.setValue(""+txtPost.text, forKey:"post")
-                newUser.setValue(""+txtSector.text, forKey:"sector")
+                newUser.setValue(""+countryLabel.text, forKey:"post")  
+                newUser.setValue(""+sectorLabel.text, forKey:"sector")
             
                 //save the object
                 context.save(nil)
@@ -41,7 +100,9 @@ class VCMain: UIViewController {
                 //println("save button pressed \(txtFullName.text)")
         
             }
-        @IBAction func btnLoad(){
+    
+    //just a test to see loading of all user objects in database in the console
+        @IBAction func btnLoadTest(){
         
                 //same as btnSave() function
                 var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
@@ -66,52 +127,247 @@ class VCMain: UIViewController {
         
             }
     
-    @IBAction func btnLoadSectorArray(){
-       /* var appDel:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-        var context:NSManagedObjectContext = appDel.managedObjectContext
-        var sectors = NSFetchRequest(entityName: "Users")
-        sectors.returnsObjectsAsFaults = false;
-        //declare predicate
-        var predicate: NSPredicate!
-        //make an array filled with sector attributes. ???
-        var propertiesToFetch: NSArray []!
-        //populate the array with the fetched sectors
-        var sectorsarray:NSArray = context.executeFetchRequest(sectors, error: nil)
-        if(sectorsarray.count > 0){
-            for res in sectorsarray{
-                println(res)
-            }
-        }else{
-            println("0 Results Returned...Potential Error")
+    
+    @IBAction func openCountryPicker(sender : UIButton)
+    {
+        let kSCREEN_WIDTH  =    UIScreen.mainScreen().bounds.size.width
+        
+        countryPicker.frame = CGRectMake(0.0, 44.0,kSCREEN_WIDTH, 216.0)
+        countryPicker.dataSource = self
+        countryPicker.delegate = self
+        countryPicker.showsSelectionIndicator = true;
+        countryPicker.backgroundColor = UIColor.whiteColor()
+        
+        var pickerDateToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
+        pickerDateToolbar.barStyle = UIBarStyle.Black
+        pickerDateToolbar.barTintColor = UIColor.grayColor()
+        pickerDateToolbar.translucent = true
+        
+        var barItems = NSMutableArray()
+        
+        var labelCancel = UILabel()
+        labelCancel.text = "Cancel"
+        var titleCancel = UIBarButtonItem(title: labelCancel.text, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPickerSelectionButtonClicked:"))
+        barItems.addObject(titleCancel)
+        
+        var flexSpace: UIBarButtonItem
+        flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        barItems.addObject(flexSpace)
+        
+        countryPickerData = countriesArray
+        countryPicker.selectRow(1, inComponent: 0, animated: false)
+        
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: Selector("countryDoneClicked:"))
+        barItems.addObject(doneBtn)
+        
+        pickerDateToolbar.setItems(barItems, animated: true)
+        
+        actionView.addSubview(pickerDateToolbar)
+        actionView.addSubview(countryPicker)
+        
+        if window {
+            window!.addSubview(actionView)
+        }
+        else
+        {
+            self.view.addSubview(actionView)
         }
         
-        */
-        
-         println("snazzy turtle")
-        
+        UIView.animateWithDuration(0.2, animations: {
+            
+            self.actionView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 260.0, UIScreen.mainScreen().bounds.size.width, 260.0)
+            
+            })
     }
     
-
-            override func viewDidLoad() {
-    
-                // Do any additional setup after loading the view.
-            }
-    
-        override func didReceiveMemoryWarning() {
+    @IBAction func openSectorPicker(sender : UIButton)
+    {
+        let kSCREEN_WIDTH  =    UIScreen.mainScreen().bounds.size.width
         
-                // Dispose of any resources that can be recreated.
-            }
-    
-    
-        /*
-        // #pragma mark - Navigation
-    
-        // In a storyboard-based application, you will often want to do a little preparation before navigation
-        override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-            // Get the new view controller using [segue destinationViewController].
-            // Pass the selected object to the new view controller.
+        sectorPicker.frame = CGRectMake(0.0, 44.0,kSCREEN_WIDTH, 216.0)
+        sectorPicker.dataSource = self
+        sectorPicker.delegate = self
+        sectorPicker.showsSelectionIndicator = true;
+        sectorPicker.backgroundColor = UIColor.whiteColor()
+        
+        var pickerDateToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
+        pickerDateToolbar.barStyle = UIBarStyle.Black
+        pickerDateToolbar.barTintColor = UIColor.grayColor()
+        pickerDateToolbar.translucent = true
+        
+        var barItems = NSMutableArray()
+        
+        var labelCancel = UILabel()
+        labelCancel.text = "Cancel"
+        var titleCancel = UIBarButtonItem(title: labelCancel.text, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelPickerSelectionButtonClicked:"))
+        barItems.addObject(titleCancel)
+        
+        var flexSpace: UIBarButtonItem
+        flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        barItems.addObject(flexSpace)
+        
+        sectorPickerData = sectorsArray
+        sectorPicker.selectRow(1, inComponent: 0, animated: false)
+        
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: Selector("sectorDoneClicked:"))
+        barItems.addObject(doneBtn)
+        
+        pickerDateToolbar.setItems(barItems, animated: true)
+        
+        actionView.addSubview(pickerDateToolbar)
+        actionView.addSubview(sectorPicker)
+        
+        if window {
+            window!.addSubview(actionView)
         }
-        */
+        else
+        {
+            self.view.addSubview(actionView)
+        }
+        
+        UIView.animateWithDuration(0.2, animations: {
+            
+            self.actionView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 260.0, UIScreen.mainScreen().bounds.size.width, 260.0)
+            
+            })
+    }
     
+    func cancelPickerSelectionButtonClicked(sender: UIBarButtonItem) {
+        
+        UIView.animateWithDuration(0.2, animations: {
+            
+            self.actionView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.size.height, UIScreen.mainScreen().bounds.size.width, 260.0)
+            
+            }, completion: { _ in
+                for obj: AnyObject in self.actionView.subviews {
+                    if let view = obj as? UIView
+                    {
+                        view.removeFromSuperview()
+                    }
+                }
+            })
+    }
+    
+    func countryDoneClicked(sender: UIBarButtonItem) {
+        
+        
+        var myRow = countryPicker.selectedRowInComponent(0)
+        countryLabel.text = countryPickerData.objectAtIndex(myRow) as NSString
+        
+        if countryLabel.text == "" {
+            countryLabel.text = "No country"
+        }
+        
+        UIView.animateWithDuration(0.2, animations: {
+            
+            self.actionView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.size.height, UIScreen.mainScreen().bounds.size.width, 260.0)
+            
+            }, completion: { _ in
+                for obj: AnyObject in self.actionView.subviews {
+                    if let view = obj as? UIView
+                    {
+                        view.removeFromSuperview()
+                    }
+                }
+            })
+    }
+   
+    func sectorDoneClicked(sender: UIBarButtonItem) {
+        
+        
+        var myRow = sectorPicker.selectedRowInComponent(0)
+        sectorLabel.text = sectorPickerData.objectAtIndex(myRow) as NSString
+        
+        if sectorLabel.text == "" {
+            sectorLabel.text = "No country"
+        }
+        
+        UIView.animateWithDuration(0.2, animations: {
+            
+            self.actionView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.size.height, UIScreen.mainScreen().bounds.size.width, 260.0)
+            
+            }, completion: { _ in
+                for obj: AnyObject in self.actionView.subviews {
+                    if let view = obj as? UIView
+                    {
+                        view.removeFromSuperview()
+                    }
+                }
+            })
+    }
+    
+    // MARK - Picker delegate
+    
+    func pickerView(_pickerView: UIPickerView!, numberOfRowsInComponent component: Int) -> Int {
+        
+        var placeholder = 0
+        
+        if(countryPickerData == countriesArray){
+            placeholder=countryPickerData.count
+        }
+        else{
+            placeholder=sectorPickerData.count
+        }
+        return placeholder
+    }
+    
+    
+    
+    func numberOfComponentsInPickerView(_pickerView: UIPickerView!) -> Int {
+        return 1
+    }
+    
+    
+    func PickerView(_pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String! {
+        var pl: NSString
+        if(countryPickerData == countriesArray){
+            pl=countryPickerData.objectAtIndex(row) as NSString
+        }
+        else{
+            pl=sectorPickerData.objectAtIndex(row) as NSString
+        }
+        return pl
     }
 
+   
+    /****API connection code
+    
+    @lazy var data = NSMutableData()
+    
+    
+    func startConnection(){
+        let urlPath: String = "http://lacedwithperfectsmiles.tumblr.com"
+        var url: NSURL = NSURL(string: urlPath)
+        var request: NSURLRequest = NSURLRequest(URL: url)
+        var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)
+        connection.start()
+    }
+    
+    func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
+        self.data.appendData(data)
+    }
+    
+    func buttonAction(sender: UIButton!){
+        startConnection()
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection!) {
+        var err: NSError
+        // throwing an error on the line below (can't figure out where the error message is)
+        var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        println(jsonResult)
+    }
+    
+    func getJSON(urlToRequest: String) -> NSData{
+        return NSData(contentsOfURL: NSURL(string: urlToRequest))
+    }
+    
+    func parseJSON(inputData: NSData) -> NSDictionary{
+        var error: NSError?
+        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as NSDictionary
+        
+        return boardsDictionary
+    }
+}*****/
+
+}
